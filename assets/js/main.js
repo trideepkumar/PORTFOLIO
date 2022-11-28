@@ -270,8 +270,8 @@ const form = document.getElementById('form')
 // selected form from DOM
 
 form.addEventListener('submit', (e) => { // added submit event listener on form
-  e.preventDefault() // preventing page reload
-  const formData = new FormData(form) // got formdata
+  e.preventDefault()                     // preventing page reload
+  const formData = new FormData(form)    // got formdata
   const FirstName = formData.get('name')
   const Email = formData.get('email')
   const Subject = formData.get('subject')
