@@ -4,7 +4,7 @@
 * Author: BootstrapMade.com
 * License: https://bootstrapmade.com/license/
 */
-(function() {
+(function () {
   "use strict";
 
   /**
@@ -90,7 +90,7 @@
   /**
    * Mobile nav toggle
    */
-  on('click', '.mobile-nav-toggle', function(e) {
+  on('click', '.mobile-nav-toggle', function (e) {
     select('body').classList.toggle('mobile-nav-active')
     this.classList.toggle('bi-list')
     this.classList.toggle('bi-x')
@@ -99,7 +99,7 @@
   /**
    * Scrool with ofset on links with a class name .scrollto
    */
-  on('click', '.scrollto', function(e) {
+  on('click', '.scrollto', function (e) {
     if (select(this.hash)) {
       e.preventDefault()
 
@@ -149,7 +149,7 @@
     new Waypoint({
       element: skilsContent,
       offset: '80%',
-      handler: function(direction) {
+      handler: function (direction) {
         let progress = select('.progress .progress-bar', true);
         progress.forEach((el) => {
           el.style.width = el.getAttribute('aria-valuenow') + '%'
@@ -170,9 +170,9 @@
 
       let portfolioFilters = select('#portfolio-flters li', true);
 
-      on('click', '#portfolio-flters li', function(e) {
+      on('click', '#portfolio-flters li', function (e) {
         e.preventDefault();
-        portfolioFilters.forEach(function(el) {
+        portfolioFilters.forEach(function (el) {
           el.classList.remove('filter-active');
         });
         this.classList.add('filter-active');
@@ -180,7 +180,7 @@
         portfolioIsotope.arrange({
           filter: this.getAttribute('data-filter')
         });
-        portfolioIsotope.on('arrangeComplete', function() {
+        portfolioIsotope.on('arrangeComplete', function () {
           AOS.refresh()
         });
       }, true);
@@ -266,9 +266,6 @@
 
 //mail submission
 
-
-
-
 const form = document.getElementById('form')
 // selected form from DOM
 
@@ -280,19 +277,19 @@ form.addEventListener('submit', (e) => { // added submit event listener on form
   const Subject = formData.get('subject')
   const Message = formData.get('message')
 
-  const body = 
-  `FirstName=${FirstName}
+  const body =
+    `FirstName=${FirstName}
   Email=${Email}
   Subject =${Subject}
   Message = ${Message}`
   // created body string 
-  
+
   const uri = `mailto:trideepkumar.h@gmail.com?body=${encodeURIComponent(body)}`;
   // created final uri to redirect to
   window.location.href = uri
   // redirected to the uri
 
-  sheetSubmission() ;
+  sheetSubmission();
 })
 
 //mail submission end
@@ -304,18 +301,48 @@ function sheetSubmission() {
   const scriptURL = 'https://script.google.com/macros/s/AKfycbzjKclpDNGbTCLblN27meFBFhxD9rcwZMplpfLmLiPWXMu3o7aapWKvCpRV7TWpP9KSkQ/exec';
   const submitButton = document.querySelector("#submit");
   submitButton.disabled = true
-//    e.preventDefault()
+  //    e.preventDefault()
   let requestBody = new FormData(form)
-  fetch(scriptURL, { method: 'POST', body: requestBody})
+  fetch(scriptURL, { method: 'POST', body: requestBody })
     .then(response => {
-    alert('Success!', response)
+      alert('Success!', response)
       submitButton.disabled = false
     })
     .catch(error => {
       alert('Error!', error.message)
-        submitButton.disabled = false
+      submitButton.disabled = false
     })
 }
 
 
 // mail submission in sheet end
+
+
+//form validation
+
+
+function validateForm() {
+  var Name = document.getElementById("name").value;
+  var Email = document.getElementById("email").value;
+  var mailformat = /^\w+([\.-]?\w+)@\w+([\.-]?\w+)(\.\w{2,3})+$/;
+  var Subject = document.getElementById("subject").value;
+  var Message = document.getElementById("message").value;
+
+
+
+
+
+  if (Name === null || Name === "" || Name.length < 4) {
+    alert(" name must be filled out");
+    return false;
+  } else if (Email.match(mailformat) === null) {
+    alert("enter valid mail id");
+    return false;
+  } else if (Subject === null || Subject === "" || Subject.length < 5) {
+    alert("enter proper subject ");
+    return false;
+  } else if (Message === null || Message === "" || Message.length < 15) {
+    alert("subject contain atleast minimum 15 letters ");
+    return false;
+  }
+}
